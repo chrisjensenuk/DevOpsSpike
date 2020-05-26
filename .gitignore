@@ -265,3 +265,4 @@ __pycache__/
 
 #Added by Chris
 .vs
+src/DevOpsSpike/Properties/PublishProfiles
