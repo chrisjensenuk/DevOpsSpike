@@ -17,7 +17,7 @@ variables:
   vmImageName: 'vs2017-win2016'
 
   # Working Directory
-  workingDirectory: '$(System.DefaultWorkingDirectory)/src/DevOpsSpike'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/src'
 
 stages:
 - stage: Build
@@ -35,8 +35,15 @@ stages:
       inputs:
         command: 'build'
         projects: |
-          $(workingDirectory)/*.csproj
+          $(workingDirectory)/DevOpsSpike/*.csproj
         arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
+
+    - task: DotNetCoreCLI@2
+      displayName: Tests
+      inputs:
+        command: 'test'
+        projects: '$(workingDirectory)/**/*Tests.csproj'
+        arguments: '--configuration $(buildConfiguration)'
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
