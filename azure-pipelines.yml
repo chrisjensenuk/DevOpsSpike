@@ -64,7 +64,7 @@ stages:
 
   jobs:
   - deployment: Deploy
-    displayName: Deploy
+    displayName: Deploy to Development
     environment: 'development'
     pool:
       vmImage: $(vmImageName)
