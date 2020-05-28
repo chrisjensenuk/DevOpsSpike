@@ -3,12 +3,8 @@ A spike project exploring Azure DevOps, ARM templates, deployments, etc
 
 ## Deploy via Custom Templates
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fchrisjensenuk%2FDevOpsSpike%2Fmaster%2Fazuredeploy.json)
-*TODO* Can I add captions to the parameters? Can I provide a title instead of 'Custom deployment'? Can I pass as custom parameters file?
 
-
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fchrisjensenuk%2FDevOpsSpike%2Fmaster%2Fazuredeploy.json" rel="nofollow"><img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true" alt="Deploy To Azure" style="max-width:100%;"></a>
-
-<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fchrisjensenuk%2FDevOpsSpike%2Fmaster%2Fazuredeploy.json" rel="nofollow">Visualize on Armviz.io</a></p>
+[Visualize on Armviz.io](http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fchrisjensenuk%2FDevOpsSpike%2Fmaster%2Fazuredeploy.json")
 
 ## Deploy Resources via CLI
 Locally from repo root from Windows CMD with Azure CLI installed:
@@ -52,6 +48,7 @@ tar.exe -a -c -f %publishZip% %publishFolder%
 - Create Key Vault (implement local and server secure config). Add Key Valut to deployment
 - Deploy to slots
 - Containerize App and deploy to ACS and K8s
+- Integrate Azure AD
 
 # Resources
 Get quick starts from here: https://github.com/Azure/azure-quickstart-templates
@@ -65,3 +62,6 @@ For Azure CLI I want to use Linux Bash although I'm a Windows user.  This means 
 
 #Learnings
 Originally I created the environment in Azure Portal and exported it as an ARM template to create azuredeploy.json.  There is too much extra cruft in the created JSON that I don't care about.  Instead I'll use quickstart templates as a base template and tweak as I need to. https://github.com/Azure/azure-quickstart-templates
+
+# Azure DevOps
+[Documentation regarding my journey with Azure DevOps](docs/azure-devops.md)

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevOpsSpike", "DevOpsSpike\DevOpsSpike.csproj", "{C8AACCD5-95E5-43FC-A2ED-5A0A794CDECC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevOpsSpike", "DevOpsSpike\DevOpsSpike.csproj", "{C8AACCD5-95E5-43FC-A2ED-5A0A794CDECC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevOpsSpikeTests", "DevOpsSpikeTests\DevOpsSpikeTests.csproj", "{7A09F72D-6165-4B8A-88AC-44B904922CD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{C8AACCD5-95E5-43FC-A2ED-5A0A794CDECC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8AACCD5-95E5-43FC-A2ED-5A0A794CDECC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8AACCD5-95E5-43FC-A2ED-5A0A794CDECC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A09F72D-6165-4B8A-88AC-44B904922CD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A09F72D-6165-4B8A-88AC-44B904922CD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A09F72D-6165-4B8A-88AC-44B904922CD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A09F72D-6165-4B8A-88AC-44B904922CD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
