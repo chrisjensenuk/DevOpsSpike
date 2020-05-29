@@ -42,7 +42,7 @@ namespace DevOpsSpikeTests
             var result = (OkObjectResult)await Function1.RunAsync(req, Mock.Of<ILogger>());
 
             result.StatusCode.Should().Be(StatusCodes.Status200OK);
-            result.Value.Should().Be("This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.");
+            result.Value.Should().Be("BROKEN TEST This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.");
         }
 
         public HttpRequest CreateHttpRequest(Dictionary<string, StringValues> query, string body)
