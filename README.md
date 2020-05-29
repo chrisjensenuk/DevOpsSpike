@@ -1,5 +1,9 @@
 # DevOpsSpike
-A spike project exploring Azure DevOps, ARM templates, deployments, etc 
+A spike project exploring Azure DevOps, ARM templates, deployments, etc.  
+
+The project consists of an Azure Function and Unit Test project.
+
+[![Build Status](https://dev.azure.com/chrisjensenuk/chrisjensenuk-spike/_apis/build/status/DevOpsSpike%20CI%20CD?branchName=master&stageName=Build%20stage)](https://dev.azure.com/chrisjensenuk/chrisjensenuk-spike/_build/latest?definitionId=1&branchName=master)
 
 ## Deploy via Custom Templates
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fchrisjensenuk%2FDevOpsSpike%2Fmaster%2Fazuredeploy.json)
