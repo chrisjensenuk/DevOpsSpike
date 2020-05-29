@@ -25,7 +25,7 @@ I'm using a multi-stage YAML pipeline instead of separate 'Releases'
 - ~~Create gated release~~
 - ~~Do CI build on repo check-in~~
 - Run Integration tests once deployed to Development env
-- Prevent PR merge on to master without successful CI
+- ~~Prevent PR merge on to master without successful CI~~
 - Add status badge to the README.md https://docs.microsoft.com/en-us/azure/devops/pipelines/create-first-pipeline?view=azure-devops&tabs=java%2Cyaml%2Cbrowser%2Ctfs-2018-2#get-the-status-badge
 
 
