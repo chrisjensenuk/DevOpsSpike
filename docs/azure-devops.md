@@ -4,7 +4,18 @@
 
 https://dev.azure.com/
 
-Pipeline is version controlled in YAML [azure-pipelines.yml](../azure-pipelines.yml)
+Pipelines are version controlled in YAML
+
+# Pipelines
+## CI CD
+This pipeline is triggered by commits on `master` and build, tests and deploys the application.  The deployment is gated.
+
+[azure-pipelines-ci-cd.yml](../azure-pipelines-ci-cd.yml)
+
+## PR CI
+This pipeline is triggered by Pull Requests targeting `master`. Runs build and test.
+
+[azure-pipelines-pr-ci.yml](../azure-pipelines-pr-ci.yml)
 
 You can change the Yaml in DevOps and it will automatically commit back to the repo (master or on a new branch).
 I'm using a multi-stage YAML pipeline instead of separate 'Releases'
