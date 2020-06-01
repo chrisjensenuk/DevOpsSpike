@@ -3,6 +3,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 using Moq;
@@ -26,7 +27,9 @@ namespace DevOpsSpikeTests
 
             var req = CreateHttpRequest(query, "");
 
-            var result = (OkObjectResult)await Function1.RunAsync(req, Mock.Of<ILogger>());
+            var function1 = new Function1(Mock.Of<IConfiguration>());
+
+            var result = (OkObjectResult)await function1.RunAsync(req, Mock.Of<ILogger>());
 
             result.StatusCode.Should().Be(StatusCodes.Status200OK);
             result.Value.Should().Be("Hello, Bob. This HTTP triggered function executed successfully.");
@@ -39,7 +42,9 @@ namespace DevOpsSpikeTests
 
             var req = CreateHttpRequest(query, "");
 
-            var result = (OkObjectResult)await Function1.RunAsync(req, Mock.Of<ILogger>());
+            var function1 = new Function1(Mock.Of<IConfiguration>());
+
+            var result = (OkObjectResult)await function1.RunAsync(req, Mock.Of<ILogger>());
 
             result.StatusCode.Should().Be(StatusCodes.Status200OK);
             result.Value.Should().Be("This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.");

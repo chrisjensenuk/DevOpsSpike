@@ -69,3 +69,6 @@ Originally I created the environment in Azure Portal and exported it as an ARM t
 
 # Azure DevOps
 [Documentation regarding my journey with Azure DevOps](docs/azure-devops.md)
+
+# Secrets
+[Documentation regarding managing secrets](docs/secrets.md)
