@@ -67,6 +67,9 @@ For Azure CLI I want to use Linux Bash although I'm a Windows user.  This means 
 #Learnings
 Originally I created the environment in Azure Portal and exported it as an ARM template to create azuredeploy.json.  There is too much extra cruft in the created JSON that I don't care about.  Instead I'll use quickstart templates as a base template and tweak as I need to. https://github.com/Azure/azure-quickstart-templates
 
+# ARM Template
+[Documentation on the ARM template](docs/arm.md)
+
 # Azure DevOps
 [Documentation regarding my journey with Azure DevOps](docs/azure-devops.md)
 

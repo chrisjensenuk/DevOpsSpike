@@ -2,8 +2,6 @@
 
 Using a Key Vault to store secrets
 
-Resources: https://github.com/Microsoft/azure-docs/blob/master/articles/app-service/app-service-key-vault-references.md
-
 - Created a Key Vault using the portal
 - In the function's App Service. `Identity` > `System assigned identity` for the Function App Service in the Portal
 > A system assigned managed identity enables Azure resources to authenticate to cloud services (e.g. Azure Key Vault) without storing credentials in code. Once enabled, all necessary permissions can be granted via Azure role-based-access-control. The lifecycle of this type of managed identity is tied to the lifecycle of this resource. Additionally, each resource (e.g. Virtual Machine) can only have one system assigned managed identity.
@@ -21,7 +19,7 @@ I like using User Secrets over Environment Variables for local development so I'
 
 You can use `local.settings.json` for local configuration but then you have to add it to `.gitIgnore`. This is unacceptable to me - I really don't want secrets inside the repo structure even if they are being ignored.
 
-*Take away* Functions REALLY want to only use Enviroment Variables. So I think I'll back out my use of User Secrets and just set Environment Variables locally. Therefore avoiding extra cruft and complexity just to get local dev working.
+*Take away* Functions (v3) REALLY want to only use Enviroment Variables. So in future I won't use User Secrets and just set Environment Variables locally. Therefore avoiding extra cruft and complexity just to get local dev working.
 
 ## TODO
 - When adding an access policy how does 'Configure from template' and 'Authorized application' work?
