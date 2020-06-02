@@ -13,9 +13,15 @@ stages:
     variables:
       AZURE_SUB: $(azureSub)
     steps:
+    - powershell: |
+        Write-Host "secret: $env:ERM"
+
+      env:
+        ERM : $(azureSub)
+
     - task: AzureResourceGroupDeployment@2
       inputs:
-        azureSubscription: '$(AZURE_SUB)'
+        azureSubscription: $(AZURE_SUB)
         action: 'Create Or Update Resource Group'
         resourceGroupName: $(resourceGroupName)
         location: $(location)
