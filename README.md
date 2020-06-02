@@ -47,9 +47,9 @@ tar.exe -a -c -f %publishZip% %publishFolder%
 # TODO
 - Use naming conventions for deployes assets. https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/naming-and-tagging
 - Create examples: deploy from CLI, PowerShell, ~~Custom Templates ('deploy to Azure button')~~, Azure Cloud Shell
-- Create Unit Test and Integration Test projects
-- Create DevOps CI/CD pipelines
-- Create Key Vault (implement local and server secure config). Add Key Valut to deployment
+- Create ~~Unit Test~~ and Integration Test projects
+- ~~Create DevOps CI/CD pipelines~~
+- ~~Create Key Vault (implement local and server secure config). Add Key Vault to deployment~~
 - Deploy to slots
 - Containerize App and deploy to ACS and K8s
 - Integrate Azure AD
@@ -64,7 +64,7 @@ For Azure CLI I want to use Linux Bash although I'm a Windows user.  This means 
 - Configurating bash and Azure CLi on Windows https://roykim.ca/2020/03/05/managing-azure-with-az-cli-and-windows-subsystem-for-linux/
 - Install WSL2 https://docs.microsoft.com/en-us/windows/wsl/install-win10
 
-#Learnings
+# Learnings
 Originally I created the environment in Azure Portal and exported it as an ARM template to create azuredeploy.json.  There is too much extra cruft in the created JSON that I don't care about.  Instead I'll use quickstart templates as a base template and tweak as I need to. https://github.com/Azure/azure-quickstart-templates
 
 # ARM Template

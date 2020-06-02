@@ -22,19 +22,21 @@ stages:
     displayName: Build
     pool:
       vmImage: $(vmImageName)
-
     steps:
-    - task: DotNetCoreCLI@2
-      displayName: Build
-      inputs:
-        command: 'build'
-        projects: |
-          $(workingDirectory)/DevOpsSpike/*.csproj
-        arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
+      - template: azure-pipelines-template-build.yml
 
-    - task: DotNetCoreCLI@2
-      displayName: Tests
-      inputs:
-        command: 'test'
-        projects: '$(workingDirectory)/**/*Tests.csproj'
-        arguments: '--configuration $(buildConfiguration)'
+#    steps:
+#    - task: DotNetCoreCLI@2
+#      displayName: Build
+#      inputs:
+#        command: 'build'
+#        projects: |
+#          $(workingDirectory)/DevOpsSpike/*.csproj
+#        arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release#
+#
+#    - task: DotNetCoreCLI@2
+#      displayName: Tests
+#      inputs:
+#        command: 'test'
+#        projects: '$(workingDirectory)/**/*Tests.csproj'
+#        arguments: '--configuration $(buildConfiguration)'
