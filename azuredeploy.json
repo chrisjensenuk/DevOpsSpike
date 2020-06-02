@@ -37,7 +37,7 @@
     }
   },
   "variables": {
-    "keyVaultName": "[concat('kv-', substring(parameters('appName'),0, 20))]",
+    "keyVaultName": "[concat('kvt-', substring(parameters('appName'),0, 19))]",
     "tenantId" : "[subscription().tenantId]", //Azure Active Directory tenant ID
     "functionAppName": "[parameters('appName')]",
     "hostingPlanName": "[parameters('appName')]",
