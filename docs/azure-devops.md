@@ -10,13 +10,24 @@ Pipelines are version controlled in YAML
 ## CI CD
 This pipeline is triggered by commits on `master` and build, tests and deploys the application.  The deployment is gated.
 
-[azure-pipelines-ci-cd.yml](../azure-pipelines-ci-cd.yml)
+[azure-pipelines-ci-cd.yml](/azure-pipelines-ci-cd.yml)
 
 ## PR CI
 This pipeline is triggered by Pull Requests targeting `master`. Runs build and test.
 
-[azure-pipelines-pr-ci.yml](../azure-pipelines-pr-ci.yml)
+[azure-pipelines-pr-ci.yml](/azure-pipelines-pr-ci.yml)
 
+## Create Env
+This pipeline create the Azure environment using the [azuredeploy.json](/azuredeploy.json) ARM template then called the CI CD template to deploy the application
+
+[azure-pipeline-create-env](/azure-pipelines-create-env.yml)
+
+## Pipeline Templates
+There are 2 templates that are used by the above pipelines:
+1. [azure-pipelines-template-build.yml](/azure-pipelines-template-build.yml). Builds and runs unit tests
+2. [azure-pipelines-template-ci-cd.yml](/azure-pipelines-template-ci-cd.yml). Calls azure-pipelines-template-build.yml to Build and run unit tests then deploys
+
+# Notes 
 You can change the Yaml in DevOps and it will automatically commit back to the repo (master or on a new branch).
 I'm using a multi-stage YAML pipeline instead of separate 'Releases'
 
