@@ -10,7 +10,7 @@ stages:
   - job: CreateEnv
     displayName: Create Environment
     variables:
-      azureSubscription: $(AZURE_SUBSCRIPTION)
+      azureSubscription: $(christest)
     steps:
     - task: AzureResourceGroupDeployment@2
       inputs:
