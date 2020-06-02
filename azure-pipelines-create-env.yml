@@ -10,6 +10,6 @@ steps:
     action: 'Create Or Update Resource Group'
     resourceGroupName: $(resourceGroupName)
     location: $(location)
-    templateLocation: 'Url of the file'
+    templateLocation: 'URL of the file'
     csmFileLink: $(armTemplateUrl)
     deploymentMode: 'Complete'
