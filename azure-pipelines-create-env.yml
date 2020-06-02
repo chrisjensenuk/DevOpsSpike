@@ -21,4 +21,4 @@ stages:
         csmFileLink: $(armTemplateUrl)
         deploymentMode: 'Complete'
 
-- template: azure-pipelines-ci-cd.yml
+- template: azure-pipelines-template-ci-cd.yml
