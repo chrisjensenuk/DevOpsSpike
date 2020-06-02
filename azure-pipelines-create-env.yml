@@ -30,6 +30,7 @@ stages:
 
 - stage: Build
   displayName: Build & Test stage
+  dependsOn: CreateEnv
   jobs:
   - job: Build
     displayName: Build
