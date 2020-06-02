@@ -1,15 +1,74 @@
 variables:
+  azureSubscription: '058a85c1-7f83-408d-baae-f0719efbd86b'
   resourceGroupName: 'rg-devopsspike-dev-001'
   location: 'eastus'
   armTemplateUrl: 'https://raw.githubusercontent.com/chrisjensenuk/DevOpsSpike/master/azuredeploy.json'
 
-steps:
-- task: AzureResourceGroupDeployment@2
-  inputs:
-    azureSubscription: '058a85c1-7f83-408d-baae-f0719efbd86b'
-    action: 'Create Or Update Resource Group'
-    resourceGroupName: $(resourceGroupName)
-    location: $(location)
-    templateLocation: 'URL of the file'
-    csmFileLink: $(armTemplateUrl)
-    deploymentMode: 'Complete'
+  # Function app name
+  functionAppName: 'devopsspike20200602'
+  # Agent VM image name
+  vmImageName: 'vs2017-win2016'
+  # Working Directory
+  workingDirectory: '$(System.DefaultWorkingDirectory)/src'
+
+stages:
+- stage: CreateEnv
+  displayName: Create Environment
+  jobs:
+  - job: Create Environment
+    steps:
+    - task: AzureResourceGroupDeployment@2
+      inputs:
+        azureSubscription: $(azureSubscription)
+        action: 'Create Or Update Resource Group'
+        resourceGroupName: $(resourceGroupName)
+        location: $(location)
+        templateLocation: 'URL of the file'
+        csmFileLink: $(armTemplateUrl)
+        deploymentMode: 'Complete'
+        
+- stage: Build
+  displayName: Build & Test stage
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+      - template: azure-pipelines-template-build.yml
+
+      - task: ArchiveFiles@2
+        displayName: 'Archive files'
+        inputs:
+          rootFolderOrFile: '$(System.DefaultWorkingDirectory)/publish_output'
+          includeRootFolder: false
+          archiveType: zip
+          archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+          replaceExistingArchive: true
+
+      - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+        artifact: drop
+
+- stage: Deploy
+  displayName: Deploy stage
+  dependsOn: Build
+  condition: succeeded()
+
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy to Development
+    pool:
+      vmImage: $(vmImageName)
+
+    strategy:
+      runOnce:
+        deploy:
+
+          steps:
+          - task: AzureFunctionApp@1
+            displayName: 'Azure functions app deploy'
+            inputs:
+              azureSubscription: '$(azureSubscription)'
+              appType: functionApp
+              appName: $(functionAppName)
+              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
