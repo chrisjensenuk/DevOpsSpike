@@ -7,7 +7,7 @@ steps:
 - task: AzureResourceGroupDeployment@2
   inputs:
     azureSubscription: '058a85c1-7f83-408d-baae-f0719efbd86b'
-    action: 'Create or Update Resource Group'
+    action: 'Create Or Update Resource Group'
     resourceGroupName: $(resourceGroupName)
     location: $(location)
     templateLocation: 'Url of the file'
