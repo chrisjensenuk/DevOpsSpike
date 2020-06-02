@@ -1,15 +1,7 @@
-variables:
-  # Azure Resource Manager connection created during pipeline creation
+parameters:
   azureSubscription: '058a85c1-7f83-408d-baae-f0719efbd86b'
-
-  # Function app name
   functionAppName: 'devopsspikeyrsvyufrz7ogy'
-
-  # Agent VM image name
   vmImageName: 'vs2017-win2016'
-
-  # Working Directory
-  workingDirectory: '$(System.DefaultWorkingDirectory)/src'
 
 stages:
 - stage: Build
@@ -19,7 +11,7 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      vmImage: $(vmImageName)
+      vmImage: ${{parameters.vmImageName}}
 
     steps:    
       - template: azure-pipelines-template-build.yml
@@ -46,7 +38,7 @@ stages:
     displayName: Deploy to Development
     environment: 'development'
     pool:
-      vmImage: $(vmImageName)
+      vmImage: ${{parameters.vmImageName}}
 
     strategy:
       runOnce:
@@ -56,7 +48,7 @@ stages:
           - task: AzureFunctionApp@1
             displayName: 'Azure functions app deploy'
             inputs:
-              azureSubscription: '$(azureSubscription)'
+              azureSubscription: '${{parameters.azureSubscription}}'
               appType: functionApp
-              appName: $(functionAppName)
+              appName: ${{parameters.functionAppName}}
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'

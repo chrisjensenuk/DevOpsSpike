@@ -1,15 +1,18 @@
+parameters:
+  workingDirectory: '$(System.DefaultWorkingDirectory)/src'
+
 steps:
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
     command: 'build'
     projects: |
-      $(workingDirectory)/DevOpsSpike/*.csproj
+      ${{parameters.workingDirectory}}/DevOpsSpike/*.csproj
     arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
 
 - task: DotNetCoreCLI@2
   displayName: Tests
   inputs:
     command: 'test'
-    projects: '$(workingDirectory)/**/*Tests.csproj'
+    projects: '${{parameters.workingDirectory}}/**/*Tests.csproj'
     arguments: '--configuration $(buildConfiguration)'
