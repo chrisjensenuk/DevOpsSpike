@@ -4,13 +4,6 @@ variables:
   location: 'eastus'
   armTemplateUrl: 'https://raw.githubusercontent.com/chrisjensenuk/DevOpsSpike/master/azuredeploy.json'
 
-  # Function app name
-  functionAppName: 'devopsspike20200602'
-  # Agent VM image name
-  vmImageName: 'vs2017-win2016'
-  # Working Directory
-  workingDirectory: '$(System.DefaultWorkingDirectory)/src'
-
 stages:
 - stage: CreateEnv
   displayName: Create Environment
@@ -28,49 +21,4 @@ stages:
         csmFileLink: $(armTemplateUrl)
         deploymentMode: 'Complete'
 
-- stage: Build
-  displayName: Build & Test stage
-  dependsOn: CreateEnv
-  jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-      - template: azure-pipelines-template-build.yml
-
-      - task: ArchiveFiles@2
-        displayName: 'Archive files'
-        inputs:
-          rootFolderOrFile: '$(System.DefaultWorkingDirectory)/publish_output'
-          includeRootFolder: false
-          archiveType: zip
-          archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-          replaceExistingArchive: true
-
-      - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-        artifact: drop
-
-- stage: Deploy
-  displayName: Deploy stage
-  dependsOn: Build
-  condition: succeeded()
-
-  jobs:
-  - deployment: Deploy
-    displayName: Deploy to Development
-    pool:
-      vmImage: $(vmImageName)
-
-    strategy:
-      runOnce:
-        deploy:
-
-          steps:
-          - task: AzureFunctionApp@1
-            displayName: 'Azure functions app deploy'
-            inputs:
-              azureSubscription: '$(azureSubscription)'
-              appType: functionApp
-              appName: $(functionAppName)
-              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+- template: azure-pipelines-ci-cd.yml
