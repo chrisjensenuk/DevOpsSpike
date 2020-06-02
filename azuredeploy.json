@@ -91,7 +91,7 @@
     },
     {
       "type": "Microsoft.KeyVault/vaults/secrets",
-      "apiVersion": "2019-06-01",
+      "apiVersion": "2019-09-01",
       "name": "[concat(variables('keyVaultName'), '/the-secret')]",
       "location": "[parameters('location')]",
       "dependsOn": [
