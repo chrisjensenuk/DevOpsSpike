@@ -15,7 +15,8 @@ stages:
 - stage: CreateEnv
   displayName: Create Environment
   jobs:
-  - job: Create Environment
+  - job: CreateEnv
+    displayName: Create Environment
     steps:
     - task: AzureResourceGroupDeployment@2
       inputs:
