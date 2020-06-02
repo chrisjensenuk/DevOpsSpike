@@ -10,15 +10,7 @@ stages:
   jobs:
   - job: CreateEnv
     displayName: Create Environment
-    variables:
-      AZURE_SUB: $(azureSub)
     steps:
-    - powershell: |
-        Write-Host "secret: $env:ERM"
-
-      env:
-        ERM : $(azureSub)
-
     - task: AzureResourceGroupDeployment@2
       inputs:
         azureSubscription: $(azureSubscription)
