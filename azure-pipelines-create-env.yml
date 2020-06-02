@@ -1,4 +1,5 @@
 variables:
+  azureSubscription: $(AZURE_SUBSCRIPTION)
   resourceGroupName: 'rg-devopsspike-dev-001'
   location: 'eastus'
   armTemplateUrl: 'https://raw.githubusercontent.com/chrisjensenuk/DevOpsSpike/master/azuredeploy.json'
@@ -12,7 +13,7 @@ stages:
     steps:
     - task: AzureResourceGroupDeployment@2
       inputs:
-        azureSubscription: $(AZURE_SUBSCRIPTION)
+        azureSubscription: $(azureSubscription)
         action: 'Create Or Update Resource Group'
         resourceGroupName: $(resourceGroupName)
         location: $(location)
