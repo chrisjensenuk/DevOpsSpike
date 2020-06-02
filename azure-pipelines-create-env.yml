@@ -1,6 +1,5 @@
 variables:
   azureSubscription: '058a85c1-7f83-408d-baae-f0719efbd86b'
-  AZURE_SUB: $(azureSub)
   resourceGroupName: 'rg-devopsspike-dev-001'
   location: 'eastus'
   armTemplateUrl: 'https://raw.githubusercontent.com/chrisjensenuk/DevOpsSpike/master/azuredeploy.json'
@@ -11,6 +10,8 @@ stages:
   jobs:
   - job: CreateEnv
     displayName: Create Environment
+    variables:
+      AZURE_SUB: $(azureSub)
     steps:
     - task: AzureResourceGroupDeployment@2
       inputs:
