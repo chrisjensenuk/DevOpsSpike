@@ -1,0 +1,15 @@
+variables:
+  resourceGroupName: 'rg-devopsspike-dev-001'
+  location: 'eastus'
+  armTemplateUrl: 'https://raw.githubusercontent.com/chrisjensenuk/DevOpsSpike/master/azuredeploy.json'
+
+steps:
+- task: AzureResourceGroupDeployment@2
+  inputs:
+    azureSubscription: '058a85c1-7f83-408d-baae-f0719efbd86b'
+    action: 'Create or Update Resource Group'
+    resourceGroupName: $(resourceGroupName)
+    location: $(location)
+    templateLocation: 'Url of the file'
+    csmFileLink: $(armTemplateUrl)
+    deploymentMode: 'Complete'
