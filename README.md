@@ -51,8 +51,9 @@ tar.exe -a -c -f %publishZip% %publishFolder%
 - ~~Create DevOps CI/CD pipelines~~
 - ~~Create Key Vault (implement local and server secure config). Add Key Vault to deployment~~
 - Deploy to slots
-- Containerize App and deploy to ACS and K8s
 - Integrate Azure AD
+- Add APIM and connect via Client Certificates, AD, bearer token, etc
+- Containerize App and create deployment to ACS and K8s
 
 # Resources
 Get quick starts from here: https://github.com/Azure/azure-quickstart-templates
@@ -75,3 +76,6 @@ Originally I created the environment in Azure Portal and exported it as an ARM t
 
 # Secrets
 [Documentation regarding managing secrets](docs/secrets.md)
+
+# Autherntication
+[Documentation regarding authenticating Function requests](docs/authentication.md)

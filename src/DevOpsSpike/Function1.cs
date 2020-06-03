@@ -24,7 +24,7 @@ namespace DevOpsSpike
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            if(!string.IsNullOrEmpty(req.Query["secret"]))
+            if (!string.IsNullOrEmpty(req.Query["secret"]))
             {
                 return new OkObjectResult(_config["the-secret"]);
             }
