@@ -23,17 +23,19 @@ namespace DevOpsSpikeClient
             }
             else
             {
-                var clientHandler = new HttpClientHandler();
-                clientHandler.ClientCertificates.Add(cert);
-                var client = new HttpClient(clientHandler);
+                while (true)
+                {
+                    var clientHandler = new HttpClientHandler();
+                    clientHandler.ClientCertificates.Add(cert);
+                    var client = new HttpClient(clientHandler);
 
-                var response = await client.GetStringAsync(requestUrl);
+                    var response = await client.GetStringAsync(requestUrl);
 
-                Console.WriteLine($"Function response:{response}");
-            }
+                    Console.WriteLine($"Function response:{response}");
 
-            Console.WriteLine("Press enter to quit");
-            Console.ReadLine();
+                    Console.ReadLine();
+                }
+            }            
         }
 
         public static X509Certificate2 GetCertificate(string thumbprint)
