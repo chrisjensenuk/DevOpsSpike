@@ -1,3 +1,5 @@
+trigger: none
+
 variables:
   azureSubscription: '058a85c1-7f83-408d-baae-f0719efbd86b'
   resourceGroupName: 'rg-devopsspike-dev-001'
