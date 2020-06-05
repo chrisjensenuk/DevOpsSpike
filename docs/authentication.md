@@ -8,7 +8,7 @@ Create a self signed certificate and save in Users Personal Certificate store. T
 resources:  
 https://stackoverflow.com/questions/49686316/azure-functions-configure-client-certificate-authentication  
 https://docs.microsoft.com/en-us/azure/app-service/app-service-web-configure-tls-mutual-auth  
-https://damienbod.com/2019/09/07/using-certificate-authentication-with-ihttpclientfactory-and-httpclient/
+https://damienbod.com/2019/09/07/using-certificate-authentication-with-ihttpclientfactory-and-httpclient/  
 
 ### Create a self cert certificate
 
@@ -45,6 +45,11 @@ Export-PfxCertificate -cert cert:\CurrentUser\My\$($ssc.Thumbprint) -FilePath $c
 $certificateCRTPath = "c:\devopsspikeclient.cer"
 Export-Certificate -Cert cert:\CurrentUser\My\$($ssc.Thumbprint) -FilePath $certificateCRTPath -Force
 ```
+
+## Trusting the certificate
+Locally you can import the .cer cert to the Local Computer > Trusted People.  Azure doesn't allow you to trust self-signed certificates.  
+
+In Azure you **Can't trust a self signed certificate** so the `chain.Build(clientCert)` validation will fail with the error "A certificate chain processed, but terminated in a root certificate which is not trusted by the trust provider."  Interestingly the example shown [here](https://docs.microsoft.com/en-us/azure/app-service/app-service-web-configure-tls-mutual-auth) skips over the CA Root validation of the Client Certificate.
 
 ## Client Certificates and Azure
 TLS is terminated at Azure's load balancers so Function HttpTriggers run as HTTP. Certificates cannot be 'passed through' over HTTP so Azure adds the client certificate to a header called `X-ARR-ClientCert`.
