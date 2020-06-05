@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace DevOpsSpikeClient
@@ -9,10 +10,13 @@ namespace DevOpsSpikeClient
     {
         static async Task Main(string[] args)
         {
+            Console.WriteLine("Are you testing locally against Functions Core Tools? (y/n)");
+            var local = Console.ReadLine().ToLower() == "y";
+
             Console.WriteLine("What's the absolute URL of the secured Function?");
             var requestUrl = Console.ReadLine();
 
-            Console.WriteLine("Enter the Thumbprint of the cert in the local user's Personal/Certificate store");
+            Console.WriteLine("What's the Thumbprint of the cert in the local user's Personal/Certificate store");
             var thumbprint = Console.ReadLine();
 
             var cert = GetCertificate(thumbprint);
@@ -25,9 +29,7 @@ namespace DevOpsSpikeClient
             {
                 while (true)
                 {
-                    var clientHandler = new HttpClientHandler();
-                    clientHandler.ClientCertificates.Add(cert);
-                    var client = new HttpClient(clientHandler);
+                    HttpClient client = local ? GetClientForLocal(cert) : GetClientForAzure(cert);
 
                     var response = await client.GetStringAsync(requestUrl);
 
@@ -36,6 +38,28 @@ namespace DevOpsSpikeClient
                     Console.ReadLine();
                 }
             }            
+        }
+
+        private static HttpClient GetClientForAzure(X509Certificate2 cert)
+        {
+            var clientHandler = new HttpClientHandler();
+            clientHandler.ClientCertificates.Add(cert);
+            return new HttpClient(clientHandler);
+        }
+
+        private static HttpClient GetClientForLocal(X509Certificate2 cert)
+        {
+            //Debugging locally so need to add the certificate as a header
+            //When in Azure the load balancer will terminate the TLS and put the client certificate into the header
+            var client = new HttpClient();
+
+            var certString = cert.GetRawCertDataString();
+            var certBytes = Encoding.UTF8.GetBytes(certString);
+            var certStringBase64 = Convert.ToBase64String(cert.RawData);
+
+            client.DefaultRequestHeaders.Add("X-ARR-ClientCert", certStringBase64);
+
+            return client;
         }
 
         public static X509Certificate2 GetCertificate(string thumbprint)
