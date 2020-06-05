@@ -7,10 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 using Moq;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace DevOpsSpikeTests
@@ -18,7 +16,7 @@ namespace DevOpsSpikeTests
     public class Function1Tests
     {
         [Fact]
-        public async Task RunAsync_when_name_specfied_then_should_be_in_response()
+        public void RunAsync_when_name_specfied_then_should_be_in_response()
         {
             var query = new Dictionary<string, StringValues>
             {
@@ -29,14 +27,14 @@ namespace DevOpsSpikeTests
 
             var function1 = new Function1(Mock.Of<IConfiguration>());
 
-            var result = (OkObjectResult)await function1.RunAsync(req, Mock.Of<ILogger>());
+            var result = (OkObjectResult) function1.Run(req, Mock.Of<ILogger>());
 
             result.StatusCode.Should().Be(StatusCodes.Status200OK);
             result.Value.Should().Be("Hello, Bob. This HTTP triggered function executed successfully.");
         }
 
         [Fact]
-        public async Task RunAsync_when_name_not_specfied_then_should_show_instruction()
+        public void RunAsync_when_name_not_specfied_then_should_show_instruction()
         {
             var query = new Dictionary<string, StringValues>();
 
@@ -44,7 +42,7 @@ namespace DevOpsSpikeTests
 
             var function1 = new Function1(Mock.Of<IConfiguration>());
 
-            var result = (OkObjectResult)await function1.RunAsync(req, Mock.Of<ILogger>());
+            var result = (OkObjectResult) function1.Run(req, Mock.Of<ILogger>());
 
             result.StatusCode.Should().Be(StatusCodes.Status200OK);
             result.Value.Should().Be("This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.");

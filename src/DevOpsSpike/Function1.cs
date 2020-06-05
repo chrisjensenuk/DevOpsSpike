@@ -18,7 +18,7 @@ namespace DevOpsSpike
         }
 
         [FunctionName("Function1")]
-        public async Task<IActionResult> RunAsync(
+        public IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
             ILogger log)
         {
